@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClipCashFarm – TikTok-Anmeldung</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; line-height: 1.6; color: #222; background: #fff; }
+  textarea { width: 100%; height: 90px; font-family: monospace; font-size: 14px; }
+  button { padding: 8px 16px; font-size: 16px; cursor: pointer; }
+</style>
+</head>
+<body>
+<h1>TikTok-Anmeldung</h1>
+<p id="info">Kopiere den Code unten und füge ihn in das Fenster der Eingabeaufforderung ein.</p>
+<textarea id="code" readonly></textarea>
+<p><button onclick="kopieren()">Code kopieren</button> <span id="ok"></span></p>
+<p><a href="index.html">ClipCashFarm</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="nutzungsbedingungen.html">Nutzungsbedingungen</a></p>
+<script>
+  var p = new URLSearchParams(window.location.search);
+  var feld = document.getElementById("code");
+  if (p.get("code")) {
+    feld.value = p.get("code");
+  } else if (p.get("error")) {
+    document.getElementById("info").textContent = "Anmeldung fehlgeschlagen: " + (p.get("error_description") || p.get("error"));
+  } else {
+    document.getElementById("info").textContent = "Diese Seite wird nach der TikTok-Anmeldung aufgerufen und zeigt dann einen Code an.";
+  }
+  function kopieren() {
+    feld.select();
+    try { navigator.clipboard.writeText(feld.value); } catch (e) { document.execCommand("copy"); }
+    document.getElementById("ok").textContent = "Kopiert!";
+  }
+</script>
+</body>
+</html>
